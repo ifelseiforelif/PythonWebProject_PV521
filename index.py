@@ -28,28 +28,29 @@ elif rand_value > 0 and rand_value < 10:
 else:
     print("value gt 10")
 
-print("Variable, rand_value: ", variable, rand_value, sep="|", end=" ")
+print(f"Variable, {variable} rand_value: ", variable, rand_value, sep="|", end=" ")
 print("Sample")
 
 # comment
 
 """
 int - 1,2,3,4,5
-float - 1.5, 10.2351, 3.14
+float - 1.5, 10.2351, 3.14 .9  2e4
 bool - True, False
 str - "Hello", 'world'
 """
 
-# print("Your number^2: ",int(input("Enter number: ")) **2)
+#print("Your number^2: ",int(input("Enter number: ")) **2)
 
 
 # Списки це тип даних, який зберігає впорядкований набір або послідовність елементів.
 # Список може зберігати як і однотипні елементи так і елементи різних типів.
-
+l0 = []
 l1 = list()  # створення пустого списку
 l2 = [1, 2, 3, 4, 5]  # створення списку з елментами
 
 del l2[1]
+print("Test copy")
 l3 = l2
 l3.append("hello")
 print(l2)
