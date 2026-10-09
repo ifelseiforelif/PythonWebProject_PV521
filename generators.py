@@ -3,9 +3,15 @@ def even_numbers(start, end):
         if number % 2 == 0:
             yield number #перетворює функцію на генератор: числа повертаються по одному, а не створюється весь список у пам’яті.
 
+def odd_numbers(start, end):
+    numbers = []
+    for number in range(start, end + 1):
+        if number % 2 != 0:
+            numbers.append(number) #перетворює функцію на генератор: числа повертаються по одному, а не створюється весь список у пам’яті.
+    return numbers
 
 # Приклад використання
-for number in even_numbers(1, 10):
+for number in odd_numbers(1,10):
     print(number)
 
 
