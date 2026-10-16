@@ -6,13 +6,22 @@ class User:
     #     print("I am ctor User()")
     #     return super().__new__(cls)
 
-    def __init__(self, name='unknown', age=18):
+    def __init__(self, skills, name='unknown', age=18):
         print('I am init method')
         User.__counter += 1
         self.__name = name #_nameClass__nameField
         self.__age = age
         self._email = 'admin@gmai.com'
         self._phone = '+1 555 555 555'
+        self._skills = skills
+
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, new_name):
+        self.__name = new_name
 
     @property
     def age(self):
@@ -46,3 +55,39 @@ class User:
 
     def __mul__(self, other):
         self.__age *= other
+
+    def __sub__(self, other):
+        if isinstance(other,int):
+            self.__age -= other
+
+    def __truediv__(self, other): #/
+        pass
+    def __floordiv__(self, other): pass # //
+
+    def __mod__(self, other): pass
+
+    def __pow__(self, other): pass # **
+
+    def __lt__(self, other): # <
+        if isinstance(other,User):
+            return self.__age < other.__age
+        else:
+            return None
+
+    def __le__(self, other): pass # <=
+    def __gt__(self, other): pass # >
+    def __ge__(self, other): pass # >=
+    def __eq__(self, other): pass # ==
+    def __ne__(self, other): pass # not
+
+    def __getitem__(self, item):
+        if isinstance(item,int):
+            if item>=0 and item<len(self._skills):
+                return self._skills[item]
+        return 'Invalid Index'
+
+    def __setitem__(self, key, value):
+        if isinstance(key, int):
+            if key>=0 and key<len(self._skills):
+                self._skills[key]=value
+

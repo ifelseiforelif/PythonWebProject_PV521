@@ -1,21 +1,51 @@
 from User import *
 
-Player = type(
-    "Player",
-    (),
-    {
-        'role':'super admin',
-        'age':18,
-        'move':lambda self:f'Moving...()'
-    }
-)
-p = Player()
+
+us1 = User([],"Bogdan", 40)
+us2 = User([],"Ivan", 30)
+if us1<us2:
+    print(f'Вік {us1.name} < {us2.name}')
+else:
+    print(f'Вік {us1.name} >= {us2.name}')
+
+us3 = User(['c++','js','python'],"Andriy", 30)
+print(us3[3])
+us3[0] = 'c#'
+print(us3._skills)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Player = type(
+#     "Player",
+#     (),
+#     {
+#         'role':'super admin',
+#         'age':18,
+#         'move':lambda self:f'Moving...()'
+#     }
+# )
+# p = Player()
 #print(p.move(), p.role)
 
 # print(int.__bases__)
-print(type(Player))
+# print(type(Player))
 
-
+#
 # user1 = User("Bob",30)
 # user1.test_counter+=2
 # User.test_counter+=1
@@ -30,6 +60,9 @@ print(type(Player))
 # print(user1)
 # user1+User("Alice", 25)
 # print(user1)
+# user1-1
+# print(user1)
+
 
 
 # user2 = User("Bob",30)
