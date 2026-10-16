@@ -1,6 +1,13 @@
 class User:
-    __counter = 0
+    test_counter = 0
+    __counter = 0 #static
+    #constructor
+    # def __new__(cls, name, age):
+    #     print("I am ctor User()")
+    #     return super().__new__(cls)
+
     def __init__(self, name='unknown', age=18):
+        print('I am init method')
         User.__counter += 1
         self.__name = name #_nameClass__nameField
         self.__age = age

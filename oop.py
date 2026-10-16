@@ -1,11 +1,35 @@
 from User import *
 
-user1 = User("Bob",30)
+Player = type(
+    "Player",
+    (),
+    {
+        'role':'super admin',
+        'age':18,
+        'move':lambda self:f'Moving...()'
+    }
+)
+p = Player()
+#print(p.move(), p.role)
 
-user1+2
-print(user1)
-user1+User("Alice", 25)
-print(user1)
+# print(int.__bases__)
+print(type(Player))
+
+
+# user1 = User("Bob",30)
+# user1.test_counter+=2
+# User.test_counter+=1
+# print(User.test_counter, user1.test_counter)
+# meta class type
+#print(type(object))
+# 1 2 Ян
+# 1 2 Віталій
+# 3 2
+
+# user1+2
+# print(user1)
+# user1+User("Alice", 25)
+# print(user1)
 
 
 # user2 = User("Bob",30)
