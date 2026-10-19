@@ -1,19 +1,35 @@
-def is_negative(num):
-    return num<0
+from Student import *
+from abc import ABC, abstractmethod
+# a - abstract b - base c-class
 
-def my_decorator(func):
-    def wrapper():
-        print("Start text")
-        func()
-        print("End text")
-    return wrapper
+class Transport(ABC):
+    @abstractmethod
+    def move(self):
+        pass
 
-@my_decorator
-def show_message():
-    print("Hi Python")
+class Car(Transport):
+    def move(self):
+        print("Car moved")
+
+class Bus(Transport):
+    def move(self):
+        print("Bus moved")
+
+
+def drive(tr):
+    if isinstance(tr,Transport):
+        tr.move()
+
 
 def main():
-    set1 = {1,2,4}  # create set
+    drive(Car())
+    drive(Bus())
+    drive(type("Tank",(Transport,),{
+        'move':lambda self:print("Tank moved")
+    })())
+    # s = StudentOnline.from_string("Ivan:20")
+    # print(type(s))
+    # set1 = {1,2,4}  # create set
     # set2 = {2,4,3,5,11,13}
     # un = set1.difference(set2)
     # print(un) # 2,3,4
@@ -55,7 +71,22 @@ def main():
     #
     # test_func = lambda **arg: arg.values()
     # print(test_func(name="Bob", age=18))
-    show_message()
+    #show_message()
 
 if __name__ == '__main__':
     main()
+
+
+def is_negative(num):
+    return num<0
+
+def my_decorator(func):
+    def wrapper():
+        print("Start text")
+        func()
+        print("End text")
+    return wrapper
+
+@my_decorator
+def show_message():
+    print("Hi Python")
