@@ -3,7 +3,7 @@
 #iterators
 #MVC/MVT (Flask)
 import json
-
+import os
 
 #MRO - Method Resolution Order (C3 Лінеарізація)
 
@@ -54,25 +54,25 @@ import json
 
 
 #Mixin - це клас
-class JsonSerializerMixin():
-    import json
-    def to_json(self):
-        return json.dumps(self.__dict__, default=str, ensure_ascii=False)
-
-
-class TimeMixin:
-    def __init__(self, *args,**kwargs):
-        super().__init__(*args,**kwargs)
-        from datetime import datetime
-        self.created_at = datetime.now()
-
-class User(JsonSerializerMixin, TimeMixin):
-    def __init__(self, username: str):
-        super().__init__()
-        self.username = username
-
-u = User("Олександр")
-print(u.to_json())
+# class JsonSerializerMixin():
+#     import json
+#     def to_json(self):
+#         return json.dumps(self.__dict__, default=str, ensure_ascii=False)
+#
+#
+# class TimeMixin:
+#     def __init__(self, *args,**kwargs):
+#         super().__init__(*args,**kwargs)
+#         from datetime import datetime
+#         self.created_at = datetime.now()
+#
+# class User(JsonSerializerMixin, TimeMixin):
+#     def __init__(self, username: str):
+#         super().__init__()
+#         self.username = username
+#
+# u = User("Олександр")
+# print(u.to_json())
 
 # def test(*args):
 #     print(args)
@@ -84,3 +84,26 @@ print(u.to_json())
 # test(5,7,8,9,3)
 # test()
 # test(1,3)
+
+class Group:
+    i = 0
+    def __init__(self,students=None):
+        self._students = students
+    def __iter__(self):
+        return self
+    def __next__(self):
+        if self.i==len(self._students):
+            raise StopIteration
+        student = self._students[self.i]
+        self.i += 1
+        return student
+
+
+group = Group(['Alex','Bob', 'Egor'])
+print(next(group))
+print(next(group))
+print(next(group))
+for student in Group(['a','b','c']):
+    print(student)
+
+
