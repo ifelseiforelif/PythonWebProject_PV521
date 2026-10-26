@@ -1,6 +1,6 @@
 # MVC -> Model -> View -> Controller
 
-# View(Froms, Input, Buttons)
+# View(Forms, Input, Buttons)
 # Controller -> Model
 # |
 # View
