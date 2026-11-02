@@ -11,5 +11,8 @@ def home(request):
 
 def about(request):
     #return HttpResponse("Hello World")
-    return render(request, 'main/about.html')
+    text = 'Це сторінка про Нас. Це точно ця сторінка'
+    frameworks = []
+    return render(request, 'main/about.html',
+                  {'text': text, 'frameworks': frameworks})
 

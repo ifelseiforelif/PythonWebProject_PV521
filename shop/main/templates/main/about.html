@@ -8,7 +8,14 @@ About Page
         <div class="p-5 mb-4 bg-white rounded-3 shadow-sm">
             <h1 class="display-5 fw-bold">Вітаємо на нашому сайті!</h1>
             <p class="fs-5 text-muted">
-                Це сторінка про Нас
+                {{text}}
             </p>
+            <ul>
+                {% for framework in frameworks %}
+                <li>{{ forloop.counter }} {{ framework }}</li>
+                {% empty %}
+                <li>No data</li>
+                {% endfor %}
+            </ul>
         </div>
 {%endblock%}
