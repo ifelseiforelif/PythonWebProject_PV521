@@ -48,48 +48,27 @@
 
         <!-- Блоки контенту -->
         <div class="row g-4">
+            {% for card in cards %}
+<!--            {% if forloop.first %}-->
+<!--            <p>Start</p>-->
+<!--            {% endif %}-->
+<!--            {% if forloop.last %}-->
+<!--            <p>End</p>-->
+<!--            {% endif %}-->
 
             <div class="col-md-4">
 
                     <section class="card" style="max-width: 320px">
-  <img src="{% static 'main/images/django.png' %}" class="card-img-top" alt="...">
+  <img src="{% static 'main/images/'|add:card.image %}" class="card-img-top" alt="{{ card.title }}">
   <div class="card-body">
-    <h4 class="card-title">Card title</h4>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-    <a href="#" class="btn-solid theme-primary">Go somewhere</a>
+    <h4 class="card-title">{{ card.title }}</h4>
+    <p class="card-text">{{ card.description }}</p>
+    <a href="#" class="btn-solid theme-primary">Details</a>
   </div>
 </section>
 
             </div>
-
-            <div class="col-md-4">
-                <div class="card shadow-sm h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">Розділ 2</h5>
-                        <p class="card-text">
-                            Тут можна розмістити новини або корисну інформацію.
-                        </p>
-                        <a href="#" class="btn btn-outline-primary">
-                            Переглянути
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card shadow-sm h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">Розділ 3</h5>
-                        <p class="card-text">
-                            Тут можна розмістити додаткові матеріали.
-                        </p>
-                        <a href="#" class="btn btn-outline-primary">
-                            Переглянути
-                        </a>
-                    </div>
-                </div>
-            </div>
-
+{% endfor %}
         </div>
 
     </main>
