@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from .cards import cards
 # Create your views here.
@@ -15,19 +15,34 @@ def home(request):
 #
 
 def get_card(request, id):
+
+    if request.GET.get('title'):
+        title = request.GET.get('title')
     if id>0 and id<=len(cards):
         return render(request, 'main/card.html', {
             'card':cards[id-1],
-            'title':f'Card {id}'
+            'title':f'{title if title else "Card "+id}'
         })
     else:
         return HttpResponse("Not Found")
 
+def get_card_by_title(request):
+    title = None
+    if request.method=='GET' and  request.GET.get('title'):
+        title = request.GET.get('title')
+
+    elif request.method=='POST':
+        title = request.POST.get('title')
+    if title is not None:
+        return JsonResponse({'title': title})
+    else:
+        return HttpResponse("Not Found")
 
 def about(request):
     #return HttpResponse("Hello World")
     text = 'Це сторінка про Нас. Це точно ця сторінка'
     frameworks = []
     return render(request, 'main/about.html',
-                  {'text': text, 'frameworks': frameworks, 'cards':cards}  )
+                  {'text': text, 'frameworks': frameworks, 'cards':cards,
+                   'data':[1,2,105,102,7,10,100]}  )
 

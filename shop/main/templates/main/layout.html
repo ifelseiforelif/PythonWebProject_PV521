@@ -42,10 +42,17 @@
 
     <!-- Основний контент -->
     <main class="container mt-4">
-
     {% block content %}
         {% endblock %}
-
+  <form action="{% url 'search' %}">
+  <input type="search" name= "title" class="form-ghost" placeholder="Search...">
+      <input type="submit" value="OK">
+  </form>
+        <form action="{% url 'search' %}" method="post">
+              {% csrf_token %}
+  <input type="search" name= "title" class="form-ghost" placeholder="Search...">
+      <input type="submit" value="OK">
+  </form>
         <!-- Блоки контенту -->
         <div class="row g-4">
             {% for card in cards %}
