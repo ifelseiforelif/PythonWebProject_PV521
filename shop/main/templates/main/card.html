@@ -1,0 +1,20 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+ <div class="row g-4">
+            <div class="col-md-4">
+
+                    <section class="card" style="max-width: 320px">
+  <img src="{% static 'main/images/'|add:card.image %}" class="card-img-top" alt="{{ card.title }}">
+  <div class="card-body">
+    <h4 class="card-title">{{ card.title }}</h4>
+    <p class="card-text">{{ card.description }}</p>
+    <a href="card/{{forloop.counter}}" class="btn-solid theme-primary">Details</a>
+  </div>
+</section>
+            </div>
+{% endblock %}

@@ -13,6 +13,17 @@ def home(request):
 # параметри url/id   url/title   rozetka.ua/tv
 # query params       rozetka.ua?title=tv&start_price=3400&end_price=100000
 #
+
+def get_card(request, id):
+    if id>0 and id<=len(cards):
+        return render(request, 'main/card.html', {
+            'card':cards[id-1],
+            'title':f'Card {id}'
+        })
+    else:
+        return HttpResponse("Not Found")
+
+
 def about(request):
     #return HttpResponse("Hello World")
     text = 'Це сторінка про Нас. Це точно ця сторінка'
