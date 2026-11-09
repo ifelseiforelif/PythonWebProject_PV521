@@ -7,6 +7,8 @@
 
     <!-- Bootstrap 5 -->
     <link href="{% static 'main/css/bootstrap.min.css' %}" rel="stylesheet">
+    <script defer src="{% static 'main/js/create_card.js' %}"></script>
+
 </head>
 <body class="bg-light">
 
@@ -48,11 +50,13 @@
   <input type="search" name= "title" class="form-ghost" placeholder="Search...">
       <input type="submit" value="OK">
   </form>
-        <form action="{% url 'search' %}" method="post">
+        <form id="createForm" >
               {% csrf_token %}
-  <input type="search" name= "title" class="form-ghost" placeholder="Search...">
-      <input type="submit" value="OK">
-  </form>
+            <input type="text" name= "title" class="form-ghost" placeholder="Title">
+            <input type="text" name= "description" class="form-ghost" placeholder="Description">
+            <input type="text" name= "image" class="form-ghost" placeholder="Image">
+            <button type="submit">Create</button>
+        </form>
         <!-- Блоки контенту -->
         <div class="row g-4">
             {% for card in cards %}
@@ -89,5 +93,6 @@
 
     <!-- Bootstrap JS -->
     <script src="{% static 'main/js/bootstrap.bundle.min.js' %}"></script>
+
 </body>
 </html>

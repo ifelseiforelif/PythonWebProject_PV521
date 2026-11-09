@@ -1,6 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from .cards import cards
+import json
 # Create your views here.
 
 
@@ -46,3 +47,11 @@ def about(request):
                   {'text': text, 'frameworks': frameworks, 'cards':cards,
                    'data':[1,2,105,102,7,10,100]}  )
 
+
+def create_card(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        title = data.get('title')
+        description = data.get('description')
+        image = data.get('image')
+    return JsonResponse({'message':'ok'})
