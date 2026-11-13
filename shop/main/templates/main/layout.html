@@ -50,11 +50,11 @@
   <input type="search" name= "title" class="form-ghost" placeholder="Search...">
       <input type="submit" value="OK">
   </form>
-        <form id="createForm" >
+        <form id="createForm">
               {% csrf_token %}
             <input type="text" name= "title" class="form-ghost" placeholder="Title">
             <input type="text" name= "description" class="form-ghost" placeholder="Description">
-            <input type="text" name= "image" class="form-ghost" placeholder="Image">
+            <input type="file" name= "image"  class="form-ghost" placeholder="Image">
             <button type="submit">Create</button>
         </form>
         <!-- Блоки контенту -->

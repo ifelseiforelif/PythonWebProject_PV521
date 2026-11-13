@@ -1,7 +1,15 @@
+import datetime as dt
+
+from django.core.checks import registry
+from django.db import models
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from .cards import cards
 import json
+
+from .models import Card
+
+
 # Create your views here.
 
 
@@ -50,8 +58,18 @@ def about(request):
 
 def create_card(request):
     if request.method == 'POST':
-        data = json.loads(request.body)
-        title = data.get('title')
-        description = data.get('description')
-        image = data.get('image')
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        image = request.FILES.get('image')
+        #TODO:image.name поміняти при збережені (add datetime, uuid)
+        #TODO:перевірити чи дійсно це малюнок за ext і розмір
+        # print(image.name, image.size)
+        # print(title,description,image)
+        card = Card(
+            title=title,
+            description=description,
+            image=image,
+            created_at=dt.datetime.now(),
+            )
+        card.save()
     return JsonResponse({'message':'ok'})
