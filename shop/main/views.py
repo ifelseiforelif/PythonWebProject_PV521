@@ -1,20 +1,19 @@
 import datetime as dt
 
-from django.core.checks import registry
-from django.db import models
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.shortcuts import render
+from django.contrib import messages
 from .cards import cards
-import json
 
-from .models import Card, Tag
+from .forms import QuestionnaireForm
+from .models import Card, Tag, QuestionnaireResponse
 
 
 # Create your views here.
 
 
 #http://127.0.0.1:8000
-def home(request):
+def home(request: HttpRequest) -> HttpResponse:
     #return HttpResponse("Hello World")
     return render(request, 'main/index.html', {'cards':cards})
 
@@ -23,7 +22,7 @@ def home(request):
 # query params       rozetka.ua?title=tv&start_price=3400&end_price=100000
 #
 
-def get_card(request, id):
+def get_card(request: HttpRequest, id: int) -> HttpResponse:
 
     if request.GET.get('title'):
         title = request.GET.get('title')
@@ -35,7 +34,7 @@ def get_card(request, id):
     else:
         return HttpResponse("Not Found")
 
-def get_card_by_title(request):
+def get_card_by_title(request: HttpRequest) -> HttpResponse:
     title = None
     if request.method=='GET' and  request.GET.get('title'):
         title = request.GET.get('title')
@@ -47,7 +46,7 @@ def get_card_by_title(request):
     else:
         return HttpResponse("Not Found")
 
-def about(request):
+def about(request: HttpRequest) -> HttpResponse:
     #return HttpResponse("Hello World")
     text = 'Це сторінка про Нас. Це точно ця сторінка'
     frameworks = []
@@ -56,7 +55,17 @@ def about(request):
                    'data':[1,2,105,102,7,10,100]}  )
 
 
-def create_card(request):
+def questions(request: HttpRequest) -> HttpResponse:
+    form = QuestionnaireForm(request.POST if request.method == 'POST' else None)
+    if request.method == 'POST' and form.is_valid():
+        # Зберігаємо відповіді лише після успішної перевірки всіх полів.
+        QuestionnaireResponse.objects.create(**form.cleaned_data)
+        messages.success(request, 'Дякуємо! Ваші відповіді збережено.')
+        form = QuestionnaireForm()
+    return render(request, 'main/questions.html', {'form': form})
+
+
+def create_card(request: HttpRequest) -> JsonResponse:
     if request.method == 'POST':
         title = request.POST.get('title')
         description = request.POST.get('description')
@@ -79,7 +88,7 @@ def create_card(request):
 #Роботу з моделлю винести в окремий сервіс
 
 
-def test_create(request):
+def test_create(_request: HttpRequest) -> HttpResponse:
     card = Card(
         title='test card',
         description='test description',

@@ -89,6 +89,10 @@ DATABASES = {
         'PASSWORD': os.getenv('DB_PASS'), # пароль
         'HOST': os.getenv('DB_HOST'), # або IP
         'PORT': os.getenv('DB_PORT'),
+        # Використовуємо кодування з підтримкою кирилиці для MySQL-з'єднання.
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+        },
     }
 }
 
