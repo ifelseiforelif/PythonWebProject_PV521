@@ -7,7 +7,7 @@ from django.shortcuts import render
 from .cards import cards
 import json
 
-from .models import Card
+from .models import Card, Tag
 
 
 # Create your views here.
@@ -77,3 +77,19 @@ def create_card(request):
 #Додати можливість при реєстрації користувача завантажити
 #його аватар
 #Роботу з моделлю винести в окремий сервіс
+
+
+def test_create(request):
+    card = Card(
+        title='test card',
+        description='test description',
+        image='test_image.png',
+        created_at=dt.datetime.now(),
+    )
+    card.save()
+    tag = Tag.objects.create(
+        name='test_tag',
+    )
+    card.tags.add(tag)
+
+    return HttpResponse("ok")
